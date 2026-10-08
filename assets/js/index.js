@@ -70,9 +70,6 @@ async function getApodDate() {
 async function getLanunches() {
   let response = await fetch(`https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=12`);
   response = await response.json();
-  console.log('====================================');
-  console.log(response);
-  console.log('====================================');
   leadingTight.innerHTML = response.results[0].name;
   lanuchTitle.innerHTML = response.results[0].launch_service_provider.name;
   lanuchRocket.innerHTML = response.results[0].rocket.configuration.name;
@@ -86,8 +83,8 @@ async function getLanunches() {
     year: "numeric",
   });
 
-  lanuchDateContent.innerHTML = formattedDate;
-  lanuchTimeContent.innerHTML = response.results[0].net.split("T0")[1].replace(/:00Z$/, "");
+  lanuchDateContent.innerHTML = formattedDate;  
+  lanuchTimeContent.innerHTML = response.results[0].net.split("T")[1].replace(/:00Z$/, "");
 
   const dateObj = new Date(response.results[0].net);
   const hours = dateObj.getUTCHours();
@@ -155,7 +152,6 @@ launchesPlanets.addEventListener("click", function () {
 
 function getLanunchesData(data) {
   let launchContainer = ``;
-  console.log(data);
   for (let i = 1; i <= data.length - 1; i++) {
 
     const date = new Date(data[i].net);
